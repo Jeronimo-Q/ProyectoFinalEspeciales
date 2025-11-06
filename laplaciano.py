@@ -3,12 +3,16 @@ import matplotlib.pyplot as plt
 import cv2
 
 img = cv2.imread('CharizardPSA2.png', cv2.IMREAD_GRAYSCALE)
+img_smooth = cv2.GaussianBlur(img, (3,3), 0)
+img_hist = cv2.equalizeHist(img_smooth)
 
-lap = cv2.Laplacian(img, cv2.CV_64F)
+lap = cv2.Laplacian(img_hist, cv2.CV_64F)
 
-img2 = cv2.imread('CharizardPSA8.png', cv2.IMREAD_GRAYSCALE)
+img2 = cv2.imread('cha5.jpg', cv2.IMREAD_GRAYSCALE)
+img_smooth2 = cv2.GaussianBlur(img2, (3,3), 0)
+img_hist2 = cv2.equalizeHist(img_smooth2)
 
-lap2 = cv2.Laplacian(img2, cv2.CV_64F)
+lap2 = cv2.Laplacian(img_hist2, cv2.CV_64F)
 
 var_lap = lap.var()
 print(f"Varianza del Laplaciano: {var_lap:.2f}")
